@@ -10,7 +10,7 @@
             <v-list-item-title>Home</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-        <v-list-item router :to="{ name: 'login' }">
+        <v-list-item v-if="isLogin===false" router :to="{ name: 'login' }">
           <v-list-item-action>
             <v-icon>mdi-contact-mail</v-icon>
           </v-list-item-action>
@@ -18,7 +18,7 @@
             <v-list-item-title>로그인</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-            <v-list-item router :to="{ name: 'mypage' }">
+            <v-list-item v-else router :to="{ name: 'mypage' }">
           <v-list-item-action>
             <v-icon>mdi-contact-mail</v-icon>
           </v-list-item-action>
@@ -34,7 +34,32 @@
       <v-toolbar-title>Application</v-toolbar-title>
       <v-spacer></v-spacer>
       <!-- <v-toolvar-items> -->
-        <v-btn v-if="isLogin">웰컴</v-btn>
+              <v-menu offset-y v-if="isLogin">
+            <template v-slot:activator="{ on }">
+              <v-btn
+                
+                color="primary"
+                dark
+                v-on="on"
+                text
+          
+              >
+          
+                Dropdown
+              </v-btn>
+            </template>
+            <v-list>
+              <v-list-item router :to="{name: 'mypage'}">
+                <v-list-item-title>마이페이지</v-list-item-title>
+              </v-list-item>
+               <v-list-item
+               @click="$store.dispatch('logout')"
+               >
+                <v-list-item-title>로그아웃</v-list-item-title>
+              </v-list-item>
+            </v-list>
+          </v-menu>
+      
         <v-btn v-else router :to="{name: 'login'}">Log In</v-btn>
       <!-- </v-toolvar-items> -->
     </v-app-bar>

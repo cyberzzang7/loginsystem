@@ -33,16 +33,19 @@ export default new Vuex.Store({
         loginError(state) {
             state.isLogin = false
             state.isLoginError = true
+        },
+        logout(state){
+            state.isLogin=false
+            state.isLoginError=false
+            state.userInfo = null
         }
         // 로그인이 실패했을 때,
     }, // state값을  로직을 변화 시킴
     actions: {
         //로그인 시도 성공했을 때 뮤테이션 성공을 실행
-        login({
-            state,
-            commit
-        }, loginObj) {
+        login({ state,commit }, loginObj) {
             let selectedUser = null
+
             state.allUsers.forEach(user => {
                     if (user.email === loginObj.email) 
                         selectedUser = user
@@ -53,6 +56,10 @@ export default new Vuex.Store({
                 commit("loginSuccess", selectedUser)
                 router.push({name: "mypage"})
             }
+        },
+        logout({commit}){
+            commit("logout")
+            router.push({name: "home"})
         }
     }
 })
