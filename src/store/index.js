@@ -1,14 +1,15 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-
+import router from '../router'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
+        userInfo: null,
         allUsers: [
             {
                 id: 1,
-                name: "hoza",
+                name: "김원형",
                 email: "cyberzzang7@naver.com",
                 password: "1234"
             }, {
@@ -23,9 +24,10 @@ export default new Vuex.Store({
     },
     mutations: {
         //로그인이 성공했을 때,
-        loginSuccess(state) {
+        loginSuccess(state, payload) {
             state.isLogin = true
             state.isLoginError = false
+            state.userInfo = payload
         },
         // 로그인이 실패했을 때,
         loginError(state) {
@@ -36,17 +38,21 @@ export default new Vuex.Store({
     }, // state값을  로직을 변화 시킴
     actions: {
         //로그인 시도 성공했을 때 뮤테이션 성공을 실행
-        login({state,commit}, loginObj) {
-            let selectedUser = null 
+        login({
+            state,
+            commit
+        }, loginObj) {
+            let selectedUser = null
             state.allUsers.forEach(user => {
-                   if(user.email === loginObj.email) selectedUser = user
+                    if (user.email === loginObj.email) 
+                        selectedUser = user
                 })
-            selectedUser === null
-                ? commit("loginError")
-                : selectedUser.password !== loginObj.password
-                    ? commit("loginError")
-                    : commit("loginSuccess")
-
+            if (selectedUser === null || selectedUser.password !== loginObj.password) 
+                commit("loginError")
+            else {
+                commit("loginSuccess", selectedUser)
+                router.push({name: "mypage"})
+            }
         }
     }
 })
