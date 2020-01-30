@@ -26,7 +26,8 @@
                                 로그인
                                 <!--로그인한당-->
                             </v-btn>
-
+                             <!-- <v-btn @click="test">테스트</v-btn>
+                             <v-btn @click="postTest">포스트테스트</v-btn> -->
                         </div>
                     </div>
                 </v-card>
@@ -36,7 +37,8 @@
 </template>
 
 <script>
-    import {mapState, mapActions} from "vuex"
+import {mapState, mapActions} from "vuex"
+
 
     export default {
         data() {
@@ -51,7 +53,34 @@
             ...mapState(["isLogin","isLoginError"])
         },
         methods: {
-            ...mapActions(["login"])
+            ...mapActions(["login"]),
+            // test(){
+            //     axios.get('https://reqres.in/api')
+            //     .then( res=> {
+            //         // handle success
+            //         console.log(res);
+            //     })
+            //     .catch( err=> {
+            //         // handle error
+            //         console.log(err);
+            //     })
+            //     .finally( () => {
+            //         console.log("test")
+            //         // always executed
+            //     });
+            // },
+            // postTest(){
+            //     axios.post('https://reqres.in/api/register', {
+            //     email: "eve.holt@reqres.in",
+            //     password: "pistol"
+            // })
+            // .then(res=> {
+            //     console.log(res);
+            // })
+            // .catch(err=> {
+            //     console.log(err);
+            // });
+            // }
         }
     }
     //그 유저의 비밀번호와 입력된 비밀번호를 비교한다. 둘다 true 가 되면 로그인 된다.

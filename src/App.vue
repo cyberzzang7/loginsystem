@@ -18,7 +18,7 @@
             <v-list-item-title>로그인</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-            <v-list-item v-else router :to="{ name: 'mypage' }">
+            <v-list-item else router :to="{ name: 'mypage' }">
           <v-list-item-action>
             <v-icon>mdi-contact-mail</v-icon>
           </v-list-item-action>

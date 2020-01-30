@@ -42,7 +42,7 @@ const routes = [
     beforeEnter: onlyAuthUser,
     component: () => 
     import(/* webpackChunkName: "mypage" */ "../views/Mypage.vue")
-  }
+  },
 ]
 
 const router = new VueRouter({
